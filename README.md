@@ -39,41 +39,41 @@ This pipeline demonstrates the core computational skills required for multiome p
 
 ```
 Raw 10x Multiome H5
-        │
-        ▼
-┌───────────────────┐
-│  QC & Filtering   │  RNA: min genes, mito %; ATAC: fragments, peaks per cell
-└────────┬──────────┘
-         │
-         ▼
-┌───────────────────┐
-│  Preprocessing    │  RNA: normalize → log1p → HVG → PCA → UMAP → Leiden
-└────────┬──────────┘  ATAC: TF-IDF → Truncated SVD (LSI) → UMAP → Leiden
-         │
-         ▼
-┌───────────────────────────┐
-│  Virtual Perturbation     │  Score cells on neuroinflammation + synaptic gene sets
-│  Labelling                │  → Perturbation A (high neuroinflammation)
-└────────┬──────────────────┘  → Perturbation B (high synaptic score)
-         │
-         ▼
-┌──────────────────────────────────────────────┐
-│  Differential Analysis                        │
-│  ├─ RNA: Wilcoxon + BH correction (DE genes) │
-│  └─ ATAC: Rate-ratio test (DA peaks)         │
-└────────┬─────────────────────────────────────┘
-         │
-         ▼
-┌────────────────────────────────────┐
-│  TF Motif Scanning (HOMER)         │  Top 500 DA peaks → BED → mm10 FASTA
-│  ├─ Perturbation A peaks           │  → Known vertebrate TF motif enrichment
-│  └─ Perturbation B peaks           │
-└────────┬───────────────────────────┘
-         │
-         ▼
-┌────────────────────────────────────┐
-│  Cross-Modality Heatmap            │  RNA scores + ATAC scores per group
-└────────────────────────────────────┘
+        |
+        v
++-------------------+
+|  QC & Filtering   |  RNA: min genes, mito %; ATAC: fragments, peaks per cell
++--------+----------+
+         |
+         v
++-------------------+
+|  Preprocessing    |  RNA: normalize -> log1p -> HVG -> PCA -> UMAP -> Leiden
++--------+----------+  ATAC: TF-IDF -> Truncated SVD (LSI) -> UMAP -> Leiden
+         |
+         v
++---------------------------+
+|  Virtual Perturbation     |  Score cells on neuroinflammation + synaptic gene sets
+|  Labelling                |  -> Perturbation A (high neuroinflammation)
++--------+------------------+  -> Perturbation B (high synaptic score)
+         |
+         v
++----------------------------------------------+
+|  Differential Analysis                        |
+|  +-- RNA: Wilcoxon + BH correction (DE genes)|
+|  +-- ATAC: Rate-ratio test (DA peaks)        |
++--------+-------------------------------------+
+         |
+         v
++------------------------------------+
+|  TF Motif Scanning (HOMER)         |  Top 500 DA peaks -> BED -> mm10 FASTA
+|  +-- Perturbation A peaks          |  -> Known vertebrate TF motif enrichment
+|  +-- Perturbation B peaks          |
++--------+---------------------------+
+         |
+         v
++------------------------------------+
+|  Cross-Modality Heatmap            |  RNA scores + ATAC scores per group
++------------------------------------+
 ```
 
 ***
@@ -193,20 +193,20 @@ CRISPR-scRNA-scATAC-Multiome/
 ├── crispr_multiome_pipeline.py          # Main analysis pipeline (Python)
 ├── CRISPR_scRNA_scATAC_analysis.ipynb   # Annotated Jupyter notebook walkthrough
 ├── images/                              # All generated figures (300 dpi)
-│   ├── rna_umap_virtual_perturbations.jpg
-│   ├── rna_umap_clusters.jpg
-│   ├── rna_qc_metrics.jpg
-│   ├── rna_pathway_scores_virtual_perturbations.jpg
-│   ├── rna_de_perturbationA_vs_B_volcano.jpg
-│   ├── atac_umap_virtual_perturbations.jpg
-│   ├── atac_umap_lsi_clusters.jpg
-│   ├── atac_qc_metrics.jpg
-│   ├── atac_diff_peaks_perturbationA_vs_B_volcano.jpg
-│   └── multiome_virtual_perturbation_pathway_heatmap.jpg
+│   ├── rna_umap_virtual_perturbations.png
+│   ├── rna_umap_clusters.png
+│   ├── rna_qc_metrics.png
+│   ├── rna_pathway_scores_virtual_perturbations.png
+│   ├── rna_de_perturbationA_vs_B_volcano.png
+│   ├── atac_umap_virtual_perturbations.png
+│   ├── atac_umap_lsi_clusters.png
+│   ├── atac_qc_metrics.png
+│   ├── atac_diff_peaks_perturbationA_vs_B_volcano.png
+│   └── multiome_virtual_perturbation_pathway_heatmap.png
 └── README.md
 ```
 
-> **Note:** The raw 10x Genomics H5 data file is not included in this repository due to size. Download it from the [10x Genomics website](https://www.10xgenomics.com/datasets/fresh-cortex-from-alzheimer-s-disease-mouse-model-multiplexed-samples-2-standard) and place it in the project root before running the pipeline.
+> **Note:** The raw 10x Genomics H5 data file is not included due to size. Download it from the [10x Genomics website](https://www.10xgenomics.com/datasets/fresh-cortex-from-alzheimer-s-disease-mouse-model-multiplexed-samples-2-standard) and place it in the project root before running the pipeline.
 
 ***
 
@@ -228,14 +228,14 @@ perl ~/miniforge3/envs/ad_multiome/share/homer/configureHomer.pl -install mm10
 
 ```bash
 # Clone the repository
-git clone https://github.com/<your-username>/CRISPR-scRNA-scATAC-Multiome.git
+git clone https://github.com/chuabrandon26/CRISPR-scRNA-scATAC-Multiome.git
 cd CRISPR-scRNA-scATAC-Multiome
 
 # Place the 10x H5 file in the project directory, then run:
 python crispr_multiome_pipeline.py
 ```
 
-Or step through the analysis interactively:
+Or step through interactively:
 
 ```bash
 jupyter notebook CRISPR_scRNA_scATAC_analysis.ipynb
