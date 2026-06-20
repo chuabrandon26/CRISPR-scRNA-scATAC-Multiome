@@ -5,7 +5,7 @@
 [
 [
 
-> **A conceptual CRISPR-like single-cell multiome analysis pipeline applied to a 10x Genomics mouse brain Alzheimer's disease dataset.** This project simulates the downstream analytical workflow of a Perturb-seq or CRISPR-sciATAC experiment — combining scRNA-seq and scATAC-seq modalities to identify transcription factor programs and gene regulatory networks disrupted in neuroinflammatory states.
+> **A conceptual CRISPR-like single-cell multiome analysis pipeline applied to a 10x Genomics mouse brain Alzheimer's disease dataset.** This project simulates the downstream analytical workflow of a Perturb-seq or CRISPR-sciATAC experiment, combining scRNA-seq and scATAC-seq modalities to identify transcription factor programs and gene regulatory networks disrupted in neuroinflammatory states.
 
 ***
 
@@ -98,7 +98,7 @@ Ten Leiden clusters resolved across the full transcriptome UMAP. Cluster identit
 
 ### 3. RNA Quality Control Metrics
 
-Post-QC distributions show a clean library: RNA counts peak below 25,000 per cell, gene detection spans 500–8,000 genes per cell, and mitochondrial fraction is tightly controlled below 5% in most cells.
+Post-QC distributions show a clean library: RNA counts peak below 25,000 per cell, gene detection spans 500-8,000 genes per cell, and mitochondrial fraction is tightly controlled below 5% in most cells.
 
 
 
@@ -106,7 +106,7 @@ Post-QC distributions show a clean library: RNA counts peak below 25,000 per cel
 
 ### 4. RNA Pathway Scores by Virtual Perturbation
 
-Perturbation A cells score significantly higher on the neuroinflammation gene set, while Perturbation B cells score higher on the synaptic gene set — confirming that the virtual perturbation labels capture a biologically meaningful separation.
+Perturbation A cells score significantly higher on the neuroinflammation gene set, while Perturbation B cells score higher on the synaptic gene set, confirming that the virtual perturbation labels capture a biologically meaningful separation.
 
 
 
@@ -114,7 +114,7 @@ Perturbation A cells score significantly higher on the neuroinflammation gene se
 
 ### 5. RNA Differential Expression Volcano
 
-*Apoe* is the most significantly upregulated gene in Perturbation A (–log10 p > 240), followed by *AY036118*, *Cst3*, *Ckb1*, *Calm1*, and *B2m* — all established markers of activated microglia and disease-associated glial states in Alzheimer's models.
+*Apoe* is the most significantly upregulated gene in Perturbation A (-log10 p > 240), followed by *AY036118*, *Cst3*, *Ckb1*, *Calm1*, and *B2m*, all established markers of activated microglia and disease-associated glial states in Alzheimer's models.
 
 
 
@@ -138,7 +138,7 @@ Ten LSI-based chromatin clusters reveal clear cell-type-specific accessibility p
 
 ### 8. ATAC Quality Control Metrics
 
-Fragment counts are broadly distributed between 1,000–10,000 per cell and peaks per cell between 500–5,000, consistent with high-quality ATAC-seq libraries.
+Fragment counts are broadly distributed between 1,000-10,000 per cell and peaks per cell between 500-5,000, consistent with high-quality ATAC-seq libraries.
 
 
 
@@ -154,7 +154,7 @@ Top differentially accessible peaks include `chr1:24612324-24613211` and `chr7:1
 
 ### 10. RNA + ATAC Cross-Modality Response Heatmap
 
-The heatmap confirms concordance between RNA and ATAC modalities: Perturbation A shows positive neuroinflammation RNA score (+0.132) and negative synaptic RNA score (–0.147), while Perturbation B shows the inverse pattern.
+The heatmap confirms concordance between RNA and ATAC modalities: Perturbation A shows a positive neuroinflammation RNA score (+0.132) and negative synaptic RNA score (-0.147), while Perturbation B shows the inverse pattern.
 
 
 
@@ -165,7 +165,7 @@ The heatmap confirms concordance between RNA and ATAC modalities: Perturbation A
 HOMER motif scanning on the top 500 differential peaks per group revealed distinct TF programs:
 
 **Perturbation A (neuroinflammation-high peaks):**
-The top 8 enriched motifs all belong to the **AP-1/bZIP superfamily** (Jun, Fos, Fra1, Fra2, JunB, BATF, Fosl2, Atf3), sharing the core consensus `TGASTCA`. AP-1 is a master regulator of neuroinflammatory gene programs and is enriched at open chromatin in disease-associated microglia (DAM). BATF enrichment (24.8% of target peaks vs 13.7% background) directly links the chromatin state to the DAM transcriptional program in Alzheimer's models.
+The top 8 enriched motifs all belong to the **AP-1/bZIP superfamily** (Jun, Fos, Fra1, Fra2, JunB, BATF, Fosl2, Atf3), sharing the core consensus `TGASTCA`. AP-1 is a master regulator of neuroinflammatory gene programs and is enriched at open chromatin in disease-associated microglia (DAM). BATF enrichment (24.8% of target peaks vs. 13.7% background) directly links the chromatin state to the DAM transcriptional program in Alzheimer's models.
 
 **Perturbation B (synaptic/neuronal peaks):**
 The top enriched motifs are **RFX family members** (RFX2, RFX3, X-box), **CTCF**, **Ronin/THAP11**, and **MEF2** factors. RFX transcription factors are master regulators of neuronal ciliogenesis and axon guidance genes; CTCF marks topological domain boundaries critical for long-range gene regulation in neurons; MEF2 factors regulate synaptic plasticity and activity-dependent gene expression.
@@ -179,17 +179,17 @@ This AP-1 (inflammatory/glial) vs. RFX/CTCF (neuronal/structural) contrast direc
 The RNA and ATAC results converge on a consistent story across three levels of evidence:
 
 1. **Cell state (UMAP)**: Perturbation A and B cells separate in both RNA and ATAC space
-2. **Gene expression (DE)**: Perturbation A upregulates *Apoe*, *B2m*, *Cst3* — markers of activated microglia in Alzheimer's disease
+2. **Gene expression (DE)**: Perturbation A upregulates *Apoe*, *B2m*, *Cst3*, markers of activated microglia in Alzheimer's disease
 3. **Regulatory chromatin (HOMER)**: Perturbation A peaks are bound by AP-1 and BATF (DAM program drivers); Perturbation B peaks are bound by RFX and CTCF (neuronal regulatory elements)
 
-In a real CRISPR-sciATAC experiment, this workflow would identify which CRISPR guide RNA targets shift cells from the AP-1-driven inflammatory state toward the RFX-driven neuronal state — a directly testable mechanistic hypothesis for Alzheimer's disease therapeutic research.
+In a real CRISPR-sciATAC experiment, this workflow would identify which CRISPR guide RNA targets shift cells from the AP-1-driven inflammatory state toward the RFX-driven neuronal state, which is a directly testable mechanistic hypothesis for Alzheimer's disease therapeutic research.
 
 ***
 
 ## Repository Structure
 
 ```
-CRISPR_scRNA_scATAC/
+CRISPR-scRNA-scATAC-Multiome/
 ├── crispr_multiome_pipeline.py          # Main analysis pipeline (Python)
 ├── CRISPR_scRNA_scATAC_analysis.ipynb   # Annotated Jupyter notebook walkthrough
 ├── images/                              # All generated figures (300 dpi)
@@ -231,12 +231,11 @@ perl ~/miniforge3/envs/ad_multiome/share/homer/configureHomer.pl -install mm10
 git clone https://github.com/<your-username>/CRISPR-scRNA-scATAC-Multiome.git
 cd CRISPR-scRNA-scATAC-Multiome
 
-# Place the 10x H5 file in the project directory
-# Then run the pipeline
+# Place the 10x H5 file in the project directory, then run:
 python crispr_multiome_pipeline.py
 ```
 
-Or step through the analysis interactively using the Jupyter notebook:
+Or step through the analysis interactively:
 
 ```bash
 jupyter notebook CRISPR_scRNA_scATAC_analysis.ipynb
@@ -248,10 +247,10 @@ jupyter notebook CRISPR_scRNA_scATAC_analysis.ipynb
 
 | Package | Version | Purpose |
 |---|---|---|
-| `scanpy` | ≥1.10 | scRNA-seq preprocessing, PCA, UMAP, clustering |
-| `anndata` | ≥0.10 | Single-cell data container |
-| `scipy` | ≥1.11 | Statistical tests (Wilcoxon rank-sum) |
-| `scikit-learn` | ≥1.3 | Truncated SVD for LSI (ATAC) |
+| `scanpy` | >=1.10 | scRNA-seq preprocessing, PCA, UMAP, clustering |
+| `anndata` | >=0.10 | Single-cell data container |
+| `scipy` | >=1.11 | Statistical tests (Wilcoxon rank-sum) |
+| `scikit-learn` | >=1.3 | Truncated SVD for LSI (ATAC) |
 | `seaborn` / `matplotlib` | latest | Visualization |
 | `HOMER` | 5.1 | TF motif enrichment on differential ATAC peaks |
 
